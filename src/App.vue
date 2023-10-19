@@ -106,3 +106,12 @@ async function logout() {
     </Suspense>
   </div>
 </template>
+<style>
+.wallets-page {
+  background-size: cover;
+  background-image: url('/auth-cover.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+</style>
