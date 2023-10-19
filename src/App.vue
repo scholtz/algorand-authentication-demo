@@ -13,7 +13,14 @@ import type {
   IAlgorandAuthenticationStore,
   INotification
 } from 'algorand-authentication-component-vue'
-const defaultAuthState: IAlgorandAuthenticationStore = {}
+const defaultAuthState: IAlgorandAuthenticationStore = {
+  isAuthenticated: false,
+  arc14Header: '',
+  wallet: '',
+  account: '',
+  count: 0,
+  arc76email: ''
+}
 const authState = reactive({
   isAuthenticated: defaultAuthState.isAuthenticated,
   arc14Header: defaultAuthState.arc14Header,
@@ -74,7 +81,7 @@ async function signTx() {
 }
 async function logout() {
   if (!authComponent?.value) return
-  const logout = await authComponent.value.logout([])
+  const logout = await authComponent.value.logout()
   console.log('logout', logout)
 }
 </script>
