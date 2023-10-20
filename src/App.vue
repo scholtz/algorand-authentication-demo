@@ -2,7 +2,6 @@
 import { reactive, onMounted } from 'vue'
 import algosdk from 'algosdk'
 
-const client = new algosdk.Algodv2('', 'https://mainnet-api.algonode.cloud', 443)
 const status = reactive({
   err: {
     message: 'no error'
@@ -12,6 +11,7 @@ const status = reactive({
 
 function testGetParams() {
   try {
+    const client = new algosdk.Algodv2('', 'https://mainnet-api.algonode.cloud', 443)
     client
       .getTransactionParams()
       .do()
