@@ -10,11 +10,15 @@ const status = reactive({
   data: {}
 })
 
-onMounted(async () => {
+onMounted(() => {
   try {
-    const params = await client.getTransactionParams().do()
-    status.data = params
-    console.log('params', params)
+    client
+      .getTransactionParams()
+      .do()
+      .then((params) => {
+        status.data = params
+        console.log('params', params)
+      })
   } catch (e: any) {
     status.err = e
   }
