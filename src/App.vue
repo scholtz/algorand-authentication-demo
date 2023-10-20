@@ -85,8 +85,6 @@ async function logout() {
   const logout = await authComponent.value.logout()
   console.log('logout', logout)
 }
-
-const client = new algosdk.Algodv2('', 'https://mainnet-api.algonode.cloud', 443)
 </script>
 <template>
   <div class="flex flex-column justify-content-center min-h-full p-0 m-0">
@@ -98,7 +96,8 @@ const client = new algosdk.Algodv2('', 'https://mainnet-api.algonode.cloud', 443
         ref="authComponent"
         :wallets="['pera', 'exodus', 'defly', 'myalgo', 'mnemonic']"
         useDemoMnemonics="novel consider desert ribbon cage first audit couple discover seed text guard crater exchange roof stable march tortoise hockey magic dawn jacket cricket ability bright"
-        :algodClient="client"
+        algodHost="https://mainnet-api.algonode.cloud"
+        :algodPort="443"
       >
         <h1>Authenticated Content {{ authState.count }}</h1>
         <div>
