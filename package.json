@@ -12,19 +12,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@blockshake/defly-connect": "^1.1.6",
-    "@perawallet/connect": "^1.3.3",
-    "@randlabs/myalgo-connect": "^1.4.2",
-    "@txnlab/use-wallet-js": "^3.0.0-alpha.6",
-    "@walletconnect/modal": "^2.6.2",
-    "@walletconnect/sign-client": "^2.10.2",
-    "@walletconnect/types": "^2.10.2",
-    "algorand-authentication-component-vue": "^1.0.7",
     "algosdk": "^2.3.0",
-    "buffer": "^6.0.3",
-    "cross-fetch": "^4.0.0",
-    "primeflex": "^3.3.1",
-    "primevue": "^3.37.0",
     "vue": "^3.3.4"
   },
   "devDependencies": {
