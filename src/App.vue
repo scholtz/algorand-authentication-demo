@@ -4,6 +4,8 @@ import algosdk from 'algosdk'
 import { useToast } from 'primevue/usetoast'
 import fetch from 'cross-fetch'
 
+const fetch2 = window.fetch.bind(window)
+
 const toast = useToast()
 
 const show = () => {
@@ -90,7 +92,7 @@ async function logout() {
 const client = new algosdk.Algodv2('', 'https://mainnet-api.algonode.cloud', 443)
 
 onMounted(async () => {
-  const fetchData = await fetch('https://mainnet-api.algonode.cloud/v2/transactions/params')
+  const fetchData = await fetch2('https://mainnet-api.algonode.cloud/v2/transactions/params')
   console.log('fetchData', fetchData)
   const params = await client.getTransactionParams().do()
   console.log('params', params)
