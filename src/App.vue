@@ -10,7 +10,7 @@ const status = reactive({
   data: {}
 })
 
-onMounted(() => {
+function testGetParams() {
   try {
     client
       .getTransactionParams()
@@ -19,13 +19,17 @@ onMounted(() => {
         status.data = params
         console.log('params', params)
       })
+      .catch((reason) => {
+        status.err = reason
+      })
   } catch (e: any) {
     status.err = e
   }
-})
+}
 </script>
 
 <template>
+  <button @click="testGetParams">Push</button>
   <div>Error: {{ status.err.message }}</div>
   <div>Data : {{ status.data }}</div>
 </template>
