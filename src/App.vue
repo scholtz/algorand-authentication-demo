@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import algosdk from 'algosdk'
 import { useToast } from 'primevue/usetoast'
 const toast = useToast()
@@ -84,6 +84,13 @@ async function logout() {
   const logout = await authComponent.value.logout()
   console.log('logout', logout)
 }
+
+const client = new algosdk.Algodv2('', 'https://mainnet-api.algonode.cloud', 443)
+
+onMounted(async () => {
+  const params = await client.getTransactionParams().do()
+  console.log('params', params)
+})
 </script>
 <template>
   <div class="flex flex-column justify-content-center min-h-full p-0 m-0">
