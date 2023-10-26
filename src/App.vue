@@ -5,15 +5,13 @@ import algosdk from 'algosdk'
 import { useToast } from 'primevue/usetoast'
 const toast = useToast()
 
-const show = () => {
-  console.log('show')
-  toast.add({ severity: 'info', summary: 'Info', detail: 'Message Content', life: 3000 })
-}
 import { AlgorandAuthentication } from 'algorand-authentication-component-vue'
 import type {
   IAlgorandAuthenticationStore,
   INotification
 } from 'algorand-authentication-component-vue'
+import { AnyWalletState } from '@thencc/any-wallet'
+const anyWallet = new AnyWalletState()
 const defaultAuthState: IAlgorandAuthenticationStore = {
   isAuthenticated: false,
   arc14Header: '',
@@ -98,6 +96,7 @@ async function logout() {
         useDemoMnemonics="novel consider desert ribbon cage first audit couple discover seed text guard crater exchange roof stable march tortoise hockey magic dawn jacket cricket ability bright"
         algodHost="https://mainnet-api.algonode.cloud"
         :algodPort="443"
+        :anyWallet="anyWallet"
       >
         <h1>Authenticated Content {{ authState.count }}</h1>
         <div>
