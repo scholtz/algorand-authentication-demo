@@ -5,20 +5,24 @@ import algosdk from 'algosdk'
 import { useToast } from 'primevue/usetoast'
 const toast = useToast()
 
-import { AlgorandAuthentication } from 'algorand-authentication-component-vue'
-import type {
-  IAlgorandAuthenticationStore,
-  INotification
+import {
+  AlgorandAuthentication,
+  AuthenticationStore,
+  type INotification,
+  type IAuthenticationStore
 } from 'algorand-authentication-component-vue'
+
 import { AnyWalletState } from '@thencc/any-wallet'
-const anyWallet = new AnyWalletState()
-const defaultAuthState: IAlgorandAuthenticationStore = {
+const store = new AuthenticationStore()
+
+const defaultAuthState: IAuthenticationStore = {
   isAuthenticated: false,
   arc14Header: '',
   wallet: '',
   account: '',
   count: 0,
-  arc76email: ''
+  arc76email: '',
+  anyWallet: new AnyWalletState()
 }
 const authState = reactive({
   isAuthenticated: defaultAuthState.isAuthenticated,
@@ -26,10 +30,12 @@ const authState = reactive({
   wallet: defaultAuthState.wallet,
   account: defaultAuthState.account,
   count: defaultAuthState.count,
-  arc76email: defaultAuthState.arc76email
+  arc76email: defaultAuthState.arc76email,
+  anyWallet: defaultAuthState.anyWallet
 })
+store.anyWallet = authState.anyWallet
 
-function onStateChange(e: IAlgorandAuthenticationStore) {
+function onStateChange(e: IAuthenticationStore) {
   console.log('onStateChange', e)
   authState.isAuthenticated = e.isAuthenticated
   authState.arc14Header = e.arc14Header
@@ -37,6 +43,15 @@ function onStateChange(e: IAlgorandAuthenticationStore) {
   authState.account = e.account
   authState.count = e.count
   authState.arc76email = e.arc76email
+  authState.anyWallet = e.anyWallet
+
+  store.isAuthenticated = e.isAuthenticated
+  store.arc14Header = e.arc14Header
+  store.wallet = e.wallet
+  store.account = e.account
+  store.count = e.count
+  store.arc76email = e.arc76email
+  store.anyWallet = e.anyWallet
 }
 function onNotification(e: INotification) {
   try {
@@ -96,7 +111,7 @@ async function logout() {
         useDemoMnemonics="novel consider desert ribbon cage first audit couple discover seed text guard crater exchange roof stable march tortoise hockey magic dawn jacket cricket ability bright"
         algodHost="https://mainnet-api.algonode.cloud"
         :algodPort="443"
-        :anyWallet="anyWallet"
+        :store="store"
       >
         <h1>Authenticated Content {{ authState.count }}</h1>
         <div>
